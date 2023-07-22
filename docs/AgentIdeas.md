@@ -23,6 +23,7 @@ name a product/category and the agent will help you make the best buying decisio
 
 And give you a process to go ahead and get the best deal for you.
 Probably best for big or complex purchases like:
+
 - solar panels
 - cars
 - house mortgage
@@ -36,9 +37,9 @@ craft some relevant messages to reconnect
 - birthdays
 - mutual friends
 - mutual interests
-Send them a message and get back in touch.
-Follow up replies to talk about your own updates
-Ping them every quarter
-Let the human review before sending out, since these are personal friends
-Use that to train the agent for future messages
+- Send them a message and get back in touch.
+- Follow up replies to talk about your own updates
+- Ping them every quarter
+- Let the human review before sending out, since these are personal friends
+- Use that to train the agent for future messages
 
