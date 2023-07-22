@@ -11,3 +11,10 @@ erDiagram
     CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
 ```
 
+```mermaid
+sequenceDiagram
+  A-->B: Works!
+```
+
+<div class="mermaid">sequenceDiagram A-->B: Works!</div>
+
