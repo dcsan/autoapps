@@ -39,5 +39,6 @@ craft some relevant messages to reconnect
 Send them a message and get back in touch.
 Follow up replies to talk about your own updates
 Ping them every quarter
-Be upfront that its your agent doing the work
+Let the human review before sending out, since these are personal friends
+Use that to train the agent for future messages
 
