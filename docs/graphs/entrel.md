@@ -5,6 +5,7 @@ title: Order example
 test doc
 
 ```mermaid
+
 flowchart LR
     A[start] -->| text |B[end]
     B -. maybe .->C(round)
@@ -12,6 +13,11 @@ flowchart LR
     C <-- twoway --> D
     D --> E
     E --> D
+
+    style D fill:#800,stroke:#F00,stroke-width:4px
+    classDef red fill:#800
+
+
 ```
 
 ```mermaid
