@@ -2,7 +2,7 @@ import openai
 import os
 import json
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv("")
 
 
 expands_prompt = f"""
@@ -57,17 +57,20 @@ def generate_relation_text(text):
 
 
 if __name__ == "__main__":
-    text = """
-    It all starts with the universally applicable premise that people want to be understood and accepted. Listening is the cheapest, yet most effective concession we can make to get there. By listening intensely, a negotiator demonstrates empathy and shows a sincere desire to better understand what the other side is experiencing.
-    """.strip()
+    # text = """
+    # It all starts with the universally applicable premise that people want to be understood and accepted. Listening is the cheapest, yet most effective concession we can make to get there. By listening intensely, a negotiator demonstrates empathy and shows a sincere desire to better understand what the other side is experiencing.
+    # """.strip()
+    with open("../data/readwise_database_KnowledgeAgent.json") as g:
+        all_highlights = json.load(g)
 
-    outputs = generate_relation_text(text) # relation type -> generated_text
-    for rtype, text in outputs.items():
-        print(rtype)
-        print(text)
-        # embedding search, get relevant doc from epub
-        print("\n")
+    all_generations_per_hl = []
+    for h in all_highlights[0]["highlights"]:
+        text = h["text"]
+        outputs = generate_relation_text(text) # relation type -> generated_text
+        all_generations_per_hl.append(outputs)
 
+    with open("all_generations.json", "w") as f:
+        json.dump(all_generations_per_hl, f)
     # transform output to nodes viz format
 
     print(outputs)
