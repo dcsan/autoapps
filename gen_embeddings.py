@@ -2,7 +2,7 @@ import openai
 import os
 import json
 
-openai.api_key = os.getenv("")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 expands_prompt = f"""
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     # text = """
     # It all starts with the universally applicable premise that people want to be understood and accepted. Listening is the cheapest, yet most effective concession we can make to get there. By listening intensely, a negotiator demonstrates empathy and shows a sincere desire to better understand what the other side is experiencing.
     # """.strip()
-    with open("../data/readwise_database_KnowledgeAgent.json") as g:
+    with open("./data/readwise_database_KnowledgeAgent.json") as g:
         all_highlights = json.load(g)
 
     all_generations_per_hl = []
@@ -73,7 +73,7 @@ if __name__ == "__main__":
         json.dump(all_generations_per_hl, f)
     # transform output to nodes viz format
 
-    print(outputs)
+    # print(outputs)
 
 
 """
