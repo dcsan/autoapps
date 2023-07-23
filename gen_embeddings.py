@@ -2,7 +2,7 @@ import openai
 import os
 import json
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv("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")
 
 
 expands_prompt = f"""
