@@ -6,24 +6,34 @@ import {
 import { BookApi } from "../../api/bookApi";
 import { useEffect, useState } from "react";
 import { BookGraph } from "../../data/bookData";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function Book() {
   const [bookData, setBookData] = useState<BookGraph>()
-  const bookName = 'negotiation'
+  // const bookName = 'negotiation'
+  // const bookName = 'nego'
+  const bookName = 'graph'
+  // const { bookName } = useParams<string>()
+
 
   useEffect(() => {
+    if (!bookName) return
     BookApi.getBook(bookName).then((data) => {
       setBookData(data)
       console.log('bookData', data)
     })
-  }, [setBookData])
+  }, [setBookData, bookName])
 
   const nodes = bookData?.nodes
   const nodeItems = nodes?.map((node: any) => {
     return (
       <Box key={node.id}>
-        <Link to={`/nodes/${bookName}/${node.id}`}>{node.id}: {node.label}</Link>
+        <Link to={`/nodes/${bookName}/${node.id}`}>
+          <code>
+            {node.id}:
+          </code>
+          {node.label}
+        </Link>
       </Box>
     )
   })

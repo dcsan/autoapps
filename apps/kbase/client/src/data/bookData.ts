@@ -11,6 +11,8 @@ export type BookEdge = {
   text: string;
   from: string;
   to: string;
+  type: string; // category
+  label?: string;
 };
 
 export type BookGraph = {

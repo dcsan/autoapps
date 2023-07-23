@@ -13,7 +13,7 @@ function NodePage() {
   const [nodeData, setNodeData] = useState<BookNode>()
   const [linkData, setLinkData] = useState<BookEdge[]>()
 
-  const bookname = 'negotiation'
+  const bookname = 'graph'
   const { nodeId } = useParams<string>();
 
 
@@ -28,13 +28,15 @@ function NodePage() {
   }, [setBookData, nodeId])
 
   function nodeLinks(mode: 'from' | 'to') {
-    const links = linkData?.map((link: BookEdge) => {
+    const links = linkData?.map((link: BookEdge, index: number) => {
       // const target = mode === 'from' ? link.from : link.to
       const target = link.to
       const from = link.from
+      // const label = link.label || link.split(' ').slice(0, 3).join(' ')
+      const label = link.id
       return (
-        <Box key={link.id}>
-          <Link to={`/nodes/${bookname}/${target}`}>{from} ➡ {target} </Link>
+        <Box key={index}>
+          <Link to={`/nodes/${bookname}/${target}`}> type {link.type} ➡ {label} </Link>
         </Box>
       )
     })
@@ -60,7 +62,7 @@ function NodePage() {
       <Box className='section'>
         <h2>Node [{nodeData?.label}]</h2>
         {nodeItem()}
-        <h3>Links</h3>
+        <h3>Links {linkData?.length}</h3>
         {nodeLinks('from')}
       </Box>
 
