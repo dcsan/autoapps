@@ -20,12 +20,22 @@ class WeaviateHybridSearchTransformersRetriever(WeaviateHybridSearchRetriever):
         if not self._client.schema.exists(self._index_name):
             self._client.schema.create_class(class_obj)
 
+
+def escape_string_with_quotes(input_string):
+    # Escape single quotes (')
+    escaped_string = input_string.replace("'", "\\'")
+
+    # Escape double quotes (")
+    escaped_string = escaped_string.replace('"', '\\"')
+
+    return escaped_string
+
 if __name__ == "__main__":
     with open("./data/readwise_database_KnowledgeAgent.json") as g:
         all_highlights = json.load(g)
 
     with open("./all_generations.json") as g:
-        all_generatoins = json.load(g)
+        all_generations = json.load(g)
 
 
     class_name = "P2842eba01fcfb2f997160fc4e1af4898"
@@ -39,7 +49,36 @@ if __name__ == "__main__":
         client=client, index_name="P2842eba01fcfb2f997160fc4e1af4898", text_key="content",
         attributes=["paragraphIndex", "chapterIndex", "cfiRange"], create_schema_if_missing=True
     )
+    import hashlib
 
-    best_results = retriever.get_relevant_documents("""Dry""")
+    all_relationships = []
+    nodes = {hashlib.md5(a["text"].encode("utf-8")).hexdigest(): a["text"] for i, a in enumerate(all_highlights[0]["highlights"])}
+    print(nodes)
+    edges = []
+    edge_id = 0
 
-    print(best_results)
+    for g,a in zip(all_generations, all_highlights[0]["highlights"]):
+        highlight_hash = hashlib.md5(a["text"].encode("utf-8")).hexdigest()
+        for c, text  in g.items():
+            print(text)
+            try:
+                best_results = retriever.get_relevant_documents("""%s""" % text)
+            except Exception as e:
+                print("issue with %s" % text)
+                best_results = []
+            best_results_text = [ _c.page_content for _c in best_results ]
+            for _b in best_results_text:
+                _h = hashlib.md5(_b.encode("utf-8")).hexdigest()
+                nodes[_h] = _b
+                edges.append({"edge_id": edge_id, "from": highlight_hash, "to": _h, "type": c})
+                edge_id += 1
+
+    final_json = {
+        "nodes":[{"id": id, "text": text} for id, text in nodes.items()],
+        "edges": edges
+    }
+
+    with open("graph.json", "w") as f:
+        json.dump(final_json, f)
+
+    # print(fina)
