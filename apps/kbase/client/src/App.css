@@ -1,0 +1,166 @@
+/*
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+*/
+
+div {
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 20px;
+}
+
+/* app */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  /* height: 100vh; */
+  padding: 0px;
+  margin: 0px;
+  padding-top: 50px;
+  width: 100vw;
+  /* background-color: #0000CC; */
+  /* border: 1px solid #ccc; */
+}
+
+.inset {
+  padding: 10px;
+}
+
+.header-nav {
+  position: fixed;
+  top: 0px;
+  z-index: 100;
+  border-bottom: 1px solid #ccc;
+  /* width: 100%; */
+  /* width: 98vw; */
+  width: 100%;
+  margin-bottom: 10px;
+  /* height: 100px; */
+  background-color: #f1d4ff;
+  color: black;
+}
+
+.footer-nav {
+  position: fixed;
+  bottom: 0px;
+  border-top: 1px solid #ccc;
+  width: 100vw;
+  /* height: 100px; */
+  /* background-color: #00dd00; */
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+
+.link-btn {
+  padding: 5px;
+
+  border: 1px rgba(100,100,100, 0.75) solid;
+  /* border-radius: 5px; */
+}
+.link-btn:hover {
+  background-color: #222;
+  color: white;
+}
+
+.field-value {
+  border-top: 1px solid #ccc;
+}
+
+.hscroll {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  .mini-card {
+    flex: 0 0 auto;
+  }
+}
+
+
+.wide {
+  width: 80%;
+}
+
+.timer-box-outer {
+  flex-direction: column;
+}
+
+.section {
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* Users */
+.active {
+  background-color: #00dd00;
+}
+
+.auction-list-item {
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.debug-text {
+  white-space:pre;
+  font-family: monospace;
+}

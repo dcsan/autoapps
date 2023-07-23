@@ -1,0 +1,21 @@
+
+about:
+    echo "Makefile for the card game"
+
+dev:
+    npm run dev --host
+
+host:
+    npx vite --host
+
+convex:
+    npx convex  dev
+
+dashboard:
+    npx convex  dashboard
+
+reload:
+    npx convex import --replace baseCards src/data/baseCards.jsonl
+    npx convex import --replace userCards src/data/userCards.jsonl
+    npx convex import --replace users src/data/users.jsonl
+
