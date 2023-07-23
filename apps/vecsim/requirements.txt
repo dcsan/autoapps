@@ -3,3 +3,6 @@ chromadb
 openai
 bs4
 sentence_transformers
+jq
+pandoc
+unstructured

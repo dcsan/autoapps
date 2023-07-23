@@ -1,0 +1,47 @@
+set export
+set dotenv-load # load .env values to use in here
+set ignore-comments := true
+
+# list all recipes
+default:
+  @just --list
+
+# remove build artifacts
+clean:
+  rm -rf dist/*
+
+cls:
+  clear && printf '\e[3J'
+
+
+# ------------ dev ------------
+dev: cls
+  DEBUG=*,-DbLog*,-nodemon*,-express*,-body-parser*,-prisma* \
+    nodemon src/app.ts
+
+# ------------ prisma ------------
+
+db-connect:
+  pscale connect reveldev-dc setup --port 3309
+
+db-branch:
+  pscale branch create reveldev-dc setup
+
+db-push:
+  npx prisma db push --accept-data-loss
+
+db-studio:
+  npx prisma studio
+
+# update client libs based on schema
+db-generate:
+  npx prisma generate
+
+db-reset:
+  npx prisma db push --force-reset
+
+db-reset-load: db-reset db-reload
+
+# ------------ data ------------
+db-reload table='all': cls
+  DEBUG=*,-prisma* ts-node src/tasks/reset.ts $table
