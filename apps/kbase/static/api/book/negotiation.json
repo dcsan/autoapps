@@ -1,0 +1,68 @@
+{
+  "nodes": [
+    {
+      "id": "index",
+      "text": "starting index of main topics",
+      "label": "index",
+      "links": [
+        "listening",
+        "effective"
+      ]
+    },
+    {
+      "id": "listening",
+      "text": "It all starts with the universally applicable premise that people want to be understood and accepted. Listening is the cheapest, yet most effective concession we can make to get there. By listening intensely, a negotiator demonstrates empathy and shows a sincere desire to better understand what the other side is experiencing.",
+      "keywords": [
+        "red",
+        "green"
+      ],
+      "label": "listening",
+      "links": [
+        "effective"
+      ]
+    },
+    {
+      "id": "effective",
+      "text": "Effective negotiation is applied people smarts, a psychological edge in every domain of life: how to size someone up, how to influence their sizing up of you, and how to use that knowledge to get what you want.",
+      "keywords": [
+        "blue",
+        "green"
+      ],
+      "label": "effective",
+      "links": [
+        "listening"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge1",
+      "from": "listening",
+      "to": "effective",
+      "type": "similarity",
+      "description": "some more on the relation between 1 and 2"
+    },
+    {
+      "id": "edge2",
+      "from": "index",
+      "to": "listening",
+      "type": "similarity"
+    },
+    {
+      "id": "edge3",
+      "from": "index",
+      "to": "effective",
+      "type": "similarity"
+    },
+    {
+      "id": "edge4",
+      "from": "listening",
+      "to": "index"
+    },
+    {
+      "id": "edge5",
+      "from": "effective",
+      "to": "index"
+    }
+  ]
+}

@@ -5,12 +5,13 @@ import {
 } from "@chakra-ui/react";
 import { BookApi } from "../../api/bookApi";
 import { useEffect, useState } from "react";
-import { BookGraph, BookNode } from "../../data/bookData";
+import { BookEdge, BookGraph, BookNode } from "../../data/bookData";
 import { Link, useParams } from "react-router-dom";
 
 function NodePage() {
   const [bookData, setBookData] = useState<BookGraph>()
   const [nodeData, setNodeData] = useState<BookNode>()
+  const [linkData, setLinkData] = useState<BookEdge[]>()
 
   const bookname = 'negotiation'
   const { nodeId } = useParams<string>();
@@ -19,15 +20,21 @@ function NodePage() {
   useEffect(() => {
     BookApi.getNode(bookname, nodeId).then((data) => {
       setNodeData(data!)
-      console.log('bookData', data)
+    })
+    BookApi.getLinks(bookname, nodeId).then((data) => {
+      setLinkData(data!)
+      console.log('linkData', data)
     })
   }, [setBookData, nodeId])
 
-  function nodeLinks() {
-    const links = nodeData?.links?.map((link) => {
+  function nodeLinks(mode: 'from' | 'to') {
+    const links = linkData?.map((link: BookEdge) => {
+      // const target = mode === 'from' ? link.from : link.to
+      const target = link.to
+      const from = link.from
       return (
-        <Box key={link}>
-          <Link to={`/nodes/${bookname}/${link}`}>{link} </Link>
+        <Box key={link.id}>
+          <Link to={`/nodes/${bookname}/${target}`}>{from} ➡ {target} </Link>
         </Box>
       )
     })
@@ -43,9 +50,6 @@ function NodePage() {
         <Box>label: {nodeData?.label}</Box>
         <Box>text: {nodeData?.text}</Box>
         <Box>keywords: {nodeData?.keywords}</Box>
-        <Box>
-          {nodeLinks()}
-        </Box>
       </Box>
     )
   }
@@ -56,6 +60,8 @@ function NodePage() {
       <Box className='section'>
         <h2>Node [{nodeData?.label}]</h2>
         {nodeItem()}
+        <h3>Links</h3>
+        {nodeLinks('from')}
       </Box>
 
     </Box>
