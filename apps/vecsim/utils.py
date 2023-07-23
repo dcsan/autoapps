@@ -4,7 +4,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 # load from disk
 def load_vdatabase(path="./chroma_store"):
     vdb = Chroma(
-        persist_directory="./chroma_store", 
+        persist_directory=path, 
         embedding_function=HuggingFaceEmbeddings()
     )
     return vdb

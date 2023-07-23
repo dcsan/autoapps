@@ -23,6 +23,7 @@ vectorstore = Chroma.from_documents(
 
 
 question = "What are the approaches to Task Decomposition?"
+print(question)
 docs = vectorstore.similarity_search(question)
 len(docs)
 # print(docs)

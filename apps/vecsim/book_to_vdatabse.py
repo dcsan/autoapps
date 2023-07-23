@@ -22,6 +22,7 @@ vectorstore = Chroma.from_documents(
     persist_directory="./chroma_store"
 )
 
+# single query
 question = "It all starts with the universally applicable premise that people want to be understood and accepted. Listening is the cheapest, yet most effective concession we can make to get there. By listening intensely, a negotiator demonstrates empathy and shows a sincere desire to better understand what the other side is experiencing."
 print(question)
 docs = vectorstore.similarity_search(question)
