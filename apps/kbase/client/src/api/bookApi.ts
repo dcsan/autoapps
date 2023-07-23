@@ -15,6 +15,13 @@ function processItems(data: BookGraph) {
     return node;
   });
 
+  data.edges = data.edges.map((edge) => {
+    const node = data.nodes.find((node) => node.id === edge.to);
+    if (node) {
+      edge.label = node.label;
+    }
+    return edge;
+  });
   return data;
 }
 

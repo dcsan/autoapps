@@ -164,3 +164,11 @@ h3 {
   white-space:pre;
   font-family: monospace;
 }
+
+.node-title {
+  font-size: 32px;
+}
+
+.node-text {
+  font-size: 26px;
+}

@@ -7,15 +7,14 @@ import { BookApi } from "../../api/bookApi";
 import { useEffect, useState } from "react";
 import { BookEdge, BookGraph, BookNode } from "../../data/bookData";
 import { Link, useParams } from "react-router-dom";
+import { Badge } from '@chakra-ui/react'
 
 function NodePage() {
   const [bookData, setBookData] = useState<BookGraph>()
   const [nodeData, setNodeData] = useState<BookNode>()
   const [linkData, setLinkData] = useState<BookEdge[]>()
-
-  const bookname = 'graph'
   const { nodeId } = useParams<string>();
-
+  const bookname = 'graph'
 
   useEffect(() => {
     BookApi.getNode(bookname, nodeId).then((data) => {
@@ -33,10 +32,13 @@ function NodePage() {
       const target = link.to
       const from = link.from
       // const label = link.label || link.split(' ').slice(0, 3).join(' ')
-      const label = link.id
+      const label = link.id || link.label
       return (
         <Box key={index}>
-          <Link to={`/nodes/${bookname}/${target}`}> type {link.type} ➡ {label} </Link>
+          <Link to={`/nodes/${bookname}/${target}`}>
+            <Badge w={150}>{link.type}</Badge>
+            ➡️ {label}
+          </Link>
         </Box>
       )
     })
@@ -48,9 +50,9 @@ function NodePage() {
   const nodeItem = () => {
     return (
       <Box key={nodeData?.id}>
+        <Box className='node-text'>{nodeData?.text}</Box>
         <Box>id: {nodeData?.id}</Box>
         <Box>label: {nodeData?.label}</Box>
-        <Box>text: {nodeData?.text}</Box>
         <Box>keywords: {nodeData?.keywords}</Box>
       </Box>
     )
@@ -60,14 +62,16 @@ function NodePage() {
     <Box className="page">
       <Header />
       <Box className='section'>
-        <h2>Node [{nodeData?.label}]</h2>
+        <Box className='node-title'>
+          {nodeData?.label}
+        </Box>
         {nodeItem()}
         <h3>Links {linkData?.length}</h3>
         {nodeLinks('from')}
       </Box>
-
     </Box>
   )
+
 }
 
 export default NodePage;
