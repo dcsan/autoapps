@@ -21,14 +21,14 @@ class WeaviateHybridSearchTransformersRetriever(WeaviateHybridSearchRetriever):
             self._client.schema.create_class(class_obj)
 
 
-def escape_string_with_quotes(input_string):
-    # Escape single quotes (')
-    escaped_string = input_string.replace("'", "\\'")
+def remove_quotes_from_string(input_string):
+    # Remove single quotes (')
+    cleaned_string = input_string.replace("'", "")
 
-    # Escape double quotes (")
-    escaped_string = escaped_string.replace('"', '\\"')
+    # Remove double quotes (")
+    cleaned_string = cleaned_string.replace('"', "")
 
-    return escaped_string
+    return cleaned_string
 
 if __name__ == "__main__":
     with open("./data/readwise_database_KnowledgeAgent.json") as g:
@@ -62,7 +62,7 @@ if __name__ == "__main__":
         for c, text  in g.items():
             print(text)
             try:
-                best_results = retriever.get_relevant_documents("""%s""" % text)
+                best_results = retriever.get_relevant_documents(remove_quotes_from_string(text))
             except Exception as e:
                 print("issue with %s" % text)
                 best_results = []
