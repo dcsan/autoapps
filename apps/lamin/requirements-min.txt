@@ -1,0 +1,7 @@
+# requirements-min.txt
+
+llama_index==0.7.11
+neo4j
+# pip install numpy
+python-dotenv
+

@@ -1,0 +1,22 @@
+name: Ubuntu
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Installing pandoc and calibre
+        run: |
+          sudo apt install pandoc -y
+          sudo apt install calibre -y
+          pip install --upgrade chardet
+      - name: Running app
+        run: |
+          make clean venv fetch merge epub

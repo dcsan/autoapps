@@ -1,0 +1,36 @@
+---
+name: "EPUB & MOBI files"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    name: "EPUB & MOBI"
+    runs-on: "macos-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GRAHAM_ESSAYS }}"
+          automatic_release_tag: "latest"
+          title: "Paul Graham Essays"
+          files: |
+            *.epub
+            *.mobi
+            *.csv
+
+      - name: Install dependencies
+        run: |
+          make dependencies
+
+      - name: Run
+        run: |
+          mkdir essays
+          make all

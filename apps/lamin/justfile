@@ -1,0 +1,27 @@
+# this is like a better makefile
+# see https://github.com/casey/just
+
+set export
+set dotenv-load # load .env values to use in here
+set ignore-comments := true
+
+# list all recipes
+default:
+  @just --list
+
+# remove build artifacts
+clean:
+  rm -rf dist/*
+
+cls:
+  clear && printf '\e[3J'
+
+dev: cls
+  venv/bin/python3 src/main.py
+
+freeze:
+  pip freeze > requirements.txt
+
+get-essay:
+  curl https://raw.githubusercontent.com/jerryjliu/llama_index/main/examples/paul_graham_essay/data/paul_graham_essay.txt > data/paul_graham_essay.txt
+
