@@ -56,9 +56,11 @@ Model for an NPC agent as part of a game.
 - keeps track of what items have been sold to who
 
 
-## Robots Improve Theater / TV Panelists
+## Robots Improv Theater / TV Panel show / Gameshow
+This could be a stage play with actors, 
+or maybe simpler a TV interview or panel show (like [HIGNFY](https://youtu.be/05uFL-oTQHY?t=89) )
 
-A range of agents setup with:
+A range of agents with:
 - different personalities
 - backstories of things that have happened to them (baggage / traumatized)
 - inventory of items
@@ -66,8 +68,8 @@ A range of agents setup with:
 - a few different rooms for the story to play out
 
 Then:
-- trigger the situation with a dramatic event
-- watch the story unfold
+- trigger the situation with a dramatic event or question
+- watch the story/discussion unfold
 
 
 ## NPC Game Bots
